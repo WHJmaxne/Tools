@@ -5,8 +5,9 @@
     <Authors>whj</Authors>
     <Company>whj</Company>
     <Product>Tool.Azure.Storage</Product>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/WHJmaxne/ToolAzureStorage</RepositoryUrl>
     <!--<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>-->
   </PropertyGroup>
 

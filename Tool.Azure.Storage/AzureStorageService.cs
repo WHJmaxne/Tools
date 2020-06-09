@@ -29,7 +29,7 @@ namespace Tool.Azure.Storage
         {
             if (this._cloudStorageAccount == null)
             {
-                CloudStorageAccount.TryParse(this._option.StorageAccount, out this._cloudStorageAccount);
+                CloudStorageAccount.TryParse(this._option.ConnectionString, out this._cloudStorageAccount);
             }
             return this._cloudStorageAccount ?? throw new Exception("CloudStorageAccount is null");
         }

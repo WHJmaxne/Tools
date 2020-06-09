@@ -7,7 +7,7 @@ namespace Tool.Azure.Storage
 {
     public class StorageOptions
     {
-        public string StorageAccount { get; set; }
+        public string ConnectionString { get; set; }
 
         public string StorageEndpoint { get; set; }
         /// <summary>

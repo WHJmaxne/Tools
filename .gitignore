@@ -340,3 +340,5 @@ healthchecksdb
 
 # Custom
 */internal-nlog.txt
+*bin/
+*obj/
