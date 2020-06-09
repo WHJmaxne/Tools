@@ -7,3 +7,12 @@ E:\User_Projects\Projects\Catering\Tool.Azure.Storage\obj\Debug\netstandard2.0\T
 E:\User_Projects\Projects\Catering\Tool.Azure.Storage\bin\Debug\netstandard2.0\Tool.Azure.Storage.pdb
 E:\User_Projects\Projects\Catering\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.dll
 E:\User_Projects\Projects\Catering\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.pdb
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\bin\Debug\netstandard2.0\Tool.Azure.Storage.deps.json
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\bin\Debug\netstandard2.0\Tool.Azure.Storage.dll
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\bin\Debug\netstandard2.0\Tool.Azure.Storage.pdb
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.csprojAssemblyReference.cache
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.AssemblyInfoInputs.cache
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.AssemblyInfo.cs
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.csproj.CoreCompileInputs.cache
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.dll
+E:\User_Projects\MySelf\AzureStorage\Tool.Azure.Storage\obj\Debug\netstandard2.0\Tool.Azure.Storage.pdb

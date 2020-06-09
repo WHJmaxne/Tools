@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>whj</Authors>
+    <Company>whj</Company>
+    <Product>Tool.Azure.Storage</Product>
   </PropertyGroup>
 
   <ItemGroup>
