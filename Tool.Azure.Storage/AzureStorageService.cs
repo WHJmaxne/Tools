@@ -13,13 +13,12 @@ namespace Tool.Azure.Storage
     {
         private readonly StorageOptions _option;
         private CloudStorageAccount _cloudStorageAccount;
-        private CloudBlobContainer _cloudBlobContainer;
+        public string ContainerName;
         public AzureStorageService(IOptions<StorageOptions> option)
         {
             this._option = option.Value;
+            this.ContainerName = option.Value.ContainerName;
         }
-
-        public string ContainerName => this._option.ContainerName;
 
         public async Task<CloudStorageAccount> CreateStorageAccountAsync()
         {
@@ -38,71 +37,44 @@ namespace Tool.Azure.Storage
 
         public async Task<CloudBlobContainer> CreateCloudBlobContainerAsync()
         {
-            if (this._cloudBlobContainer == null)
-            {
-                CloudStorageAccount storageAccount = await this.CreateStorageAccountAsync();
-
-                CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-                this._cloudBlobContainer = blobClient.GetContainerReference(this.ContainerName);
-            }
-            return this._cloudBlobContainer ?? throw new Exception("CloudBlobContainer is null");
+            CloudStorageAccount storageAccount = await this.CreateStorageAccountAsync();
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference(this.ContainerName);
+            container.CreateIfNotExists(_option.BlobContainerPublicAccessType);
+            return container;
         }
 
         public CloudBlobContainer CreateCloudBlobContainer()
         {
-            if (this._cloudBlobContainer == null)
-            {
-                CloudStorageAccount storageAccount = this.CreateStorageAccount();
-
-                CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-                this._cloudBlobContainer = blobClient.GetContainerReference(this.ContainerName);
-            }
-            return this._cloudBlobContainer ?? throw new Exception("CloudBlobContainer is null");
+            CloudStorageAccount storageAccount = this.CreateStorageAccount();
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference(this.ContainerName);
+            container.CreateIfNotExists(_option.BlobContainerPublicAccessType);
+            return container;
         }
 
         public async Task<bool> RemoveBlobAsync(string path)
         {
-            try
-            {
-                var blob = await this.GetCloudBlobAsync(path);
-                return await blob.DeleteIfExistsAsync();
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            var blob = await this.GetCloudBlobAsync(path);
+            return await blob.DeleteIfExistsAsync();
         }
 
         public async Task<string> UploadFilesFromStreamAsync(Stream stream, string filename)
         {
-            try
-            {
-                CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
-                stream.Position = 0;
-                await blockBlob.UploadFromStreamAsync(stream);
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
-            }
-            catch (Exception ex)
-            {
-                return "";
-            }
+            CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
+            stream.Position = 0;
+            await blockBlob.UploadFromStreamAsync(stream);
+            return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
         }
 
         public string UploadFilesFromStream(Stream stream, string filename)
         {
-            try
-            {
-                CloudBlobContainer container = this.CreateCloudBlobContainer();
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
-                stream.Position = 0;
-                blockBlob.UploadFromStream(stream);
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
-            }
-            catch (Exception ex)
-            {
-                return "";
-            }
+            CloudBlobContainer container = this.CreateCloudBlobContainer();
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
+            stream.Position = 0;
+            blockBlob.UploadFromStream(stream);
+            return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
         }
 
         public async Task<CloudBlob> GetCloudBlobAsync(string path)
@@ -127,12 +99,7 @@ namespace Tool.Azure.Storage
 
             var blob = await this.GetCloudBlobAsync(path);
 
-            float seconds = this._option.BlobExpireSeconds;
-            var sas = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy()
-            {
-                Permissions = SharedAccessBlobPermissions.Read,
-                SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(seconds)
-            });
+            var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
             var secureURl = blob.Uri.AbsoluteUri + sas;
             return secureURl.ToString();
         }
@@ -143,13 +110,7 @@ namespace Tool.Azure.Storage
                 return string.Empty;
 
             var blob = this.GetCloudBlob(path);
-
-            float seconds = this._option.BlobExpireSeconds;
-            var sas = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy()
-            {
-                Permissions = SharedAccessBlobPermissions.Read,
-                SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(seconds)
-            });
+            var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
             var secureURl = blob.Uri.AbsoluteUri + sas;
             return secureURl.ToString();
         }

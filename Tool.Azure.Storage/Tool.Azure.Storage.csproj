@@ -1,16 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>whj</Authors>
     <Company>whj</Company>
     <Product>Tool.Azure.Storage</Product>
+    <Version>1.0.1</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!--<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>-->
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.7" />
     <PackageReference Include="Microsoft.Azure.Storage.Common" Version="11.1.7" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <!--<None Include="LICENSE.txt" Pack="true" PackagePath=""/>-->
   </ItemGroup>
 
 </Project>
