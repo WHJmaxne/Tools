@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Tool.Azure.Storage/1.0.3": {
+      "Tool.Azure.Storage/1.0.5": {
         "dependencies": {
           "Microsoft.Azure.Storage.Blob": "11.1.7",
           "Microsoft.Azure.Storage.Common": "11.1.7",
@@ -663,7 +663,7 @@
     }
   },
   "libraries": {
-    "Tool.Azure.Storage/1.0.3": {
+    "Tool.Azure.Storage/1.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

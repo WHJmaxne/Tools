@@ -13,7 +13,18 @@ namespace Tool.Azure.Storage
     {
         private readonly StorageOptions _option;
         private CloudStorageAccount _cloudStorageAccount;
-        public string ContainerName;
+        private string _containerName;
+        public string ContainerName
+        {
+            get
+            {
+                return _containerName;
+            }
+            set
+            {
+                _containerName = value.ToLower();
+            }
+        }
         public AzureStorageService(IOptions<StorageOptions> option)
         {
             this._option = option.Value;

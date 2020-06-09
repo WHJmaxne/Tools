@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(setupAction));
             }
             services.AddScoped<IAzureStorageService, AzureStorageService>();
-            setupAction(new StorageOptions());
+            //setupAction(new StorageOptions());
             services.Configure(setupAction);
         }
     }
