@@ -30,12 +30,10 @@ namespace Tool.Azure.Storage
             this._option = option.Value;
             this.ContainerName = option.Value.ContainerName;
         }
-
         public async Task<CloudStorageAccount> CreateStorageAccountAsync()
         {
             return await Task.FromResult(this.CreateStorageAccount());
         }
-
         public CloudStorageAccount CreateStorageAccount()
         {
             if (this._cloudStorageAccount == null)
@@ -44,7 +42,6 @@ namespace Tool.Azure.Storage
             }
             return this._cloudStorageAccount ?? throw new Exception("CloudStorageAccount is null");
         }
-
 
         public async Task<CloudBlobContainer> CreateCloudBlobContainerAsync()
         {
