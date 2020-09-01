@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+wUsNr7ySUBZ6EG0qAUm/OanClJfbKoHMy4jDEfGY5qhJi9QnkHwo3qM46mlkQ9Oi6FVrv/cTwU+xH+OKNuloA==",
+  "dgSpecHash": "pJB3NiZ8+rVWthL4RJJZnFD+3h0mFABtyXnSJoVRMYFa9VdwNHdSuYlpgWCztUlUfmn1gsRfUHndm39t+sr7lw==",
   "success": true,
   "projectFilePath": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.azure.storage.common\\11.1.7\\microsoft.azure.storage.common.11.1.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.2.0\\microsoft.extensions.dependencyinjection.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.2.0\\microsoft.extensions.logging.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.options\\2.2.0\\microsoft.extensions.options.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

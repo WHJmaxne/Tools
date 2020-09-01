@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Tool.Azure.Storage
     {
         private readonly StorageOptions _option;
         private CloudStorageAccount _cloudStorageAccount;
+        private readonly ILogger<AzureStorageService> _logger;
         private string _containerName;
         public string ContainerName
         {
@@ -25,9 +27,10 @@ namespace Tool.Azure.Storage
                 _containerName = value.ToLower();
             }
         }
-        public AzureStorageService(IOptions<StorageOptions> option)
+        public AzureStorageService(IOptions<StorageOptions> option, ILogger<AzureStorageService> logger)
         {
             this._option = option.Value;
+            this._logger = logger;
             this.ContainerName = option.Value.ContainerName;
         }
         public async Task<CloudStorageAccount> CreateStorageAccountAsync()
@@ -63,26 +66,50 @@ namespace Tool.Azure.Storage
 
         public async Task<bool> RemoveBlobAsync(string path)
         {
-            var blob = await this.GetCloudBlobAsync(path);
-            return await blob.DeleteIfExistsAsync();
+            try
+            {
+                var blob = await this.GetCloudBlobAsync(path);
+                return await blob.DeleteIfExistsAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return false;
+            }
         }
 
         public async Task<string> UploadFilesFromStreamAsync(Stream stream, string filename)
         {
-            CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
-            stream.Position = 0;
-            await blockBlob.UploadFromStreamAsync(stream);
-            return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
+            try
+            {
+                CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
+                stream.Position = 0;
+                await blockBlob.UploadFromStreamAsync(stream);
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return string.Empty;
+            }
         }
 
         public string UploadFilesFromStream(Stream stream, string filename)
         {
-            CloudBlobContainer container = this.CreateCloudBlobContainer();
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
-            stream.Position = 0;
-            blockBlob.UploadFromStream(stream);
-            return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
+            try
+            {
+                CloudBlobContainer container = this.CreateCloudBlobContainer();
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
+                stream.Position = 0;
+                blockBlob.UploadFromStream(stream);
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return string.Empty;
+            }
         }
 
         public async Task<CloudBlob> GetCloudBlobAsync(string path)
@@ -102,25 +129,41 @@ namespace Tool.Azure.Storage
 
         public async Task<string> GetSecureURlAsync(string path)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            try
+            {
+                if (string.IsNullOrWhiteSpace(path))
+                    return string.Empty;
+
+                var blob = await this.GetCloudBlobAsync(path);
+
+                var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
+                var secureURl = blob.Uri.AbsoluteUri + sas;
+                return secureURl.ToString();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
                 return string.Empty;
-
-            var blob = await this.GetCloudBlobAsync(path);
-
-            var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
-            var secureURl = blob.Uri.AbsoluteUri + sas;
-            return secureURl.ToString();
+            }
         }
 
         public string GetSecureURl(string path)
         {
-            if (string.IsNullOrWhiteSpace(path))
-                return string.Empty;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(path))
+                    return string.Empty;
 
-            var blob = this.GetCloudBlob(path);
-            var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
-            var secureURl = blob.Uri.AbsoluteUri + sas;
-            return secureURl.ToString();
+                var blob = this.GetCloudBlob(path);
+                var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
+                var secureURl = blob.Uri.AbsoluteUri + sas;
+                return secureURl.ToString();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return string.Empty;
+            }
         }
 
         public string[] GetSecureArrURl(string path, params char[] splitChar)

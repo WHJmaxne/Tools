@@ -5,7 +5,7 @@
   },
   "projects": {
     "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj": {
-      "version": "1.0.5",
+      "version": "1.0.6",
       "restore": {
         "projectUniqueName": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
         "projectName": "Tool.Azure.Storage",
@@ -45,6 +45,10 @@
             "Microsoft.Azure.Storage.Common": {
               "target": "Package",
               "version": "[11.1.7, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.Extensions.Options": {
               "target": "Package",
