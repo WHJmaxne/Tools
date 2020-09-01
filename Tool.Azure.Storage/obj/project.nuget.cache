@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YDagm+Ya3NHyg2tZk0C4cy87EDbKEUBPLgwEYWddOXYmYCThvnNej8Z3Xj2R9k3STQMOLISqE24tpXiHbiK5dg==",
+  "dgSpecHash": "+wUsNr7ySUBZ6EG0qAUm/OanClJfbKoHMy4jDEfGY5qhJi9QnkHwo3qM46mlkQ9Oi6FVrv/cTwU+xH+OKNuloA==",
   "success": true,
-  "projectFilePath": "E:\\User_Projects\\MySelf\\AzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
+  "projectFilePath": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.azure.keyvault.core\\2.0.4\\microsoft.azure.keyvault.core.2.0.4.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.azure.storage.blob\\11.1.7\\microsoft.azure.storage.blob.11.1.7.nupkg.sha512",

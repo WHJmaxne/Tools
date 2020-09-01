@@ -3595,11 +3595,11 @@
   "project": {
     "version": "1.0.5",
     "restore": {
-      "projectUniqueName": "E:\\User_Projects\\MySelf\\AzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
+      "projectUniqueName": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
       "projectName": "Tool.Azure.Storage",
-      "projectPath": "E:\\User_Projects\\MySelf\\AzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
+      "projectPath": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\User_Projects\\MySelf\\AzureStorage\\Tool.Azure.Storage\\obj\\",
+      "outputPath": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3655,7 +3655,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.4.20258.7\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
