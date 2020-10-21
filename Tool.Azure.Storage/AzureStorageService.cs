@@ -95,6 +95,22 @@ namespace Tool.Azure.Storage
             }
         }
 
+        public async Task<string> LargeFileTransferAsync(string sourcePath)
+        {
+            try
+            {
+                CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(sourcePath);
+
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + sourcePath;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return string.Empty;
+            }
+        }
+
         public string UploadFilesFromStream(Stream stream, string filename)
         {
             try

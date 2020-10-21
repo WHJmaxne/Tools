@@ -3606,7 +3606,6 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "Microsoft.Azure.Storage.Blob >= 11.1.7",
-      "Microsoft.Azure.Storage.Common >= 11.1.7",
       "Microsoft.Extensions.Logging.Abstractions >= 2.2.0",
       "Microsoft.Extensions.Options >= 2.2.0",
       "NETStandard.Library >= 2.0.3"
@@ -3653,10 +3652,6 @@
             "target": "Package",
             "version": "[11.1.7, )"
           },
-          "Microsoft.Azure.Storage.Common": {
-            "target": "Package",
-            "version": "[11.1.7, )"
-          },
           "Microsoft.Extensions.Logging.Abstractions": {
             "target": "Package",
             "version": "[2.2.0, )"
@@ -3682,7 +3677,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

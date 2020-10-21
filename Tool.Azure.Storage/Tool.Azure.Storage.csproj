@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.7" />
-    <PackageReference Include="Microsoft.Azure.Storage.Common" Version="11.1.7" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
     <!--<None Include="LICENSE.txt" Pack="true" PackagePath=""/>-->
