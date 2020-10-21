@@ -10,15 +10,16 @@ namespace Tool.Azure.Storage
 {
     public interface IAzureStorageService
     {
-        Task<string> UploadFilesFromStreamAsync(Stream stream, string filename);
-        Task<string> LargeFileTransferAsync(string sourcePath);
+        Task<string> UploadFilesFromStreamAsync(Stream stream, string fileName);
+        string UploadFilesFromStream(Stream stream, string fileName);
         Task<bool> RemoveBlobAsync(string path);
         Task<CloudStorageAccount> CreateStorageAccountAsync();
         Task<CloudBlobContainer> CreateCloudBlobContainerAsync();
         Task<string> GetSecureURlAsync(string path);
         Task<CloudBlob> GetCloudBlobAsync(string path);
 
-        string UploadFilesFromStream(Stream stream, string filename);
+        Task<string> LargeFileTransferAsync(string sourcePath, string fileName);
+        string LargeFileTransfer(string sourcePath, string fileName);
         CloudStorageAccount CreateStorageAccount();
         CloudBlobContainer CreateCloudBlobContainer();
         CloudBlob GetCloudBlob(string path);

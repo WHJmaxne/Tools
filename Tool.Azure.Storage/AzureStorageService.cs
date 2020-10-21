@@ -1,11 +1,13 @@
 ﻿using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using Microsoft.Azure.Storage.DataMovement;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Tool.Azure.Storage
@@ -78,15 +80,15 @@ namespace Tool.Azure.Storage
             }
         }
 
-        public async Task<string> UploadFilesFromStreamAsync(Stream stream, string filename)
+        public async Task<string> UploadFilesFromStreamAsync(Stream stream, string fileName)
         {
             try
             {
                 CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
                 stream.Position = 0;
                 await blockBlob.UploadFromStreamAsync(stream);
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
             }
             catch (Exception ex)
             {
@@ -95,14 +97,33 @@ namespace Tool.Azure.Storage
             }
         }
 
-        public async Task<string> LargeFileTransferAsync(string sourcePath)
+        public async Task<string> LargeFileTransferAsync(string sourcePath, string fileName)
         {
             try
             {
                 CloudBlobContainer container = await this.CreateCloudBlobContainerAsync();
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(sourcePath);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
 
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + sourcePath;
+                // 设置并发操作的数量
+                TransferManager.Configurations.ParallelOperations = 64;
+                // 设置单块 blob 的大小，它必须在 4MB 到 100MB 之间，并且是 4MB 的倍数，默认情况下是 4MB
+                TransferManager.Configurations.BlockSize = 64 * 1024 * 1024;
+                // 设置传输上下文并跟踪上传进度
+                var context = new SingleTransferContext();
+                UploadOptions uploadOptions = new UploadOptions
+                {
+                    DestinationAccessCondition = AccessCondition.GenerateIfExistsCondition()
+                };
+                context.ProgressHandler = new Progress<TransferStatus>(progress =>
+                {
+                    //显示上传进度
+                    Console.WriteLine("Bytes uploaded: {0}", progress.BytesTransferred);
+                });
+
+                // 上传 Blob
+                await TransferManager.UploadAsync(sourcePath, blockBlob, uploadOptions, context, CancellationToken.None);
+
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
             }
             catch (Exception ex)
             {
@@ -111,15 +132,53 @@ namespace Tool.Azure.Storage
             }
         }
 
-        public string UploadFilesFromStream(Stream stream, string filename)
+        public string LargeFileTransfer(string sourcePath, string fileName)
         {
             try
             {
                 CloudBlobContainer container = this.CreateCloudBlobContainer();
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+
+                // 设置并发操作的数量
+                TransferManager.Configurations.ParallelOperations = 64;
+                // 设置单块 blob 的大小，它必须在 4MB 到 100MB 之间，并且是 4MB 的倍数，默认情况下是 4MB
+                TransferManager.Configurations.BlockSize = 64 * 1024 * 1024;
+
+                // 设置传输上下文并跟踪上传进度
+                var context = new SingleTransferContext();
+
+                UploadOptions uploadOptions = new UploadOptions
+                {
+                    DestinationAccessCondition = AccessCondition.GenerateIfExistsCondition()
+                };
+
+                context.ProgressHandler = new Progress<TransferStatus>(progress =>
+                {
+                    //显示上传进度
+                    Console.WriteLine("Bytes uploaded: {0}", progress.BytesTransferred);
+                });
+
+                // 上传 Blob
+                TransferManager.UploadAsync(sourcePath, blockBlob, uploadOptions, context, CancellationToken.None).Wait();
+
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return string.Empty;
+            }
+        }
+
+        public string UploadFilesFromStream(Stream stream, string fileName)
+        {
+            try
+            {
+                CloudBlobContainer container = this.CreateCloudBlobContainer();
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
                 stream.Position = 0;
                 blockBlob.UploadFromStream(stream);
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + filename;
+                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
             }
             catch (Exception ex)
             {
