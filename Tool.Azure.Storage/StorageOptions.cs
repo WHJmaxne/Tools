@@ -9,7 +9,6 @@ namespace Tool.Azure.Storage
     {
         public string ConnectionString { get; set; }
 
-        public string StorageEndpoint { get; set; }
         /// <summary>
         /// ContainerName：default
         /// </summary>

@@ -88,7 +88,7 @@ namespace Tool.Azure.Storage
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
                 stream.Position = 0;
                 await blockBlob.UploadFromStreamAsync(stream);
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
+                return blockBlob.Uri.AbsoluteUri;
             }
             catch (Exception ex)
             {
@@ -122,8 +122,7 @@ namespace Tool.Azure.Storage
 
                 // 上传 Blob
                 await TransferManager.UploadAsync(sourcePath, blockBlob, uploadOptions, context, CancellationToken.None);
-
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
+                return blockBlob.Uri.AbsoluteUri;
             }
             catch (Exception ex)
             {
@@ -161,7 +160,7 @@ namespace Tool.Azure.Storage
                 // 上传 Blob
                 TransferManager.UploadAsync(sourcePath, blockBlob, uploadOptions, context, CancellationToken.None).Wait();
 
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
+                return blockBlob.Uri.AbsoluteUri;
             }
             catch (Exception ex)
             {
@@ -178,7 +177,7 @@ namespace Tool.Azure.Storage
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
                 stream.Position = 0;
                 blockBlob.UploadFromStream(stream);
-                return this._option.StorageEndpoint + "/" + this.ContainerName + "/" + fileName;
+                return blockBlob.Uri.AbsoluteUri;
             }
             catch (Exception ex)
             {
