@@ -32,6 +32,12 @@ namespace Azure.Storage.Sample
                 options.ContainerName = "blob-test";
                 options.BlobContainerPublicAccessType = BlobContainerPublicAccessType.Blob;
             });
+
+            services.AddSmsService(options =>
+            {
+                options.AccessKeyId = "AccessKeyId";
+                options.AccessKeySecret = "AccessKeySecret";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

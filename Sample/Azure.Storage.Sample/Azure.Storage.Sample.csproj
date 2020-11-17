@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Tool.Azure.Storage\Tool.Azure.Storage.csproj" />
+    <ProjectReference Include="..\..\Tool.Sms.Aliyun\Tool.Sms.Aliyun.csproj" />
   </ItemGroup>
 
   <ItemGroup>
