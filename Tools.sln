@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool.Azure.Storage", "Tool.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{AD60EA29-5DE9-4DEA-832E-8756579245A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Sample", "Sample\Azure.Storage.Sample\Azure.Storage.Sample.csproj", "{340A4CC2-6900-43FE-9622-6285547254CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.Storage.Sample", "Sample\Azure.Storage.Sample\Azure.Storage.Sample.csproj", "{340A4CC2-6900-43FE-9622-6285547254CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
