@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Azure.Storage.Sample
+namespace Tools.Sample
 {
     public class Startup
     {

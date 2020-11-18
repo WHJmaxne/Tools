@@ -1,6 +1,6 @@
 using System;
 
-namespace Azure.Storage.Sample.Models
+namespace Tools.Sample.Models
 {
     public class ErrorViewModel
     {

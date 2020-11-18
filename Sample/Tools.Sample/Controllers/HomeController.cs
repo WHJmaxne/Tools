@@ -1,4 +1,4 @@
-﻿using Azure.Storage.Sample.Models;
+﻿using Tools.Sample.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,7 +11,7 @@ using Tool.Azure.Storage;
 using Tool.Sms.Aliyun;
 using Tool.VerifyCode;
 
-namespace Azure.Storage.Sample.Controllers
+namespace Tools.Sample.Controllers
 {
     public class HomeController : Controller
     {
