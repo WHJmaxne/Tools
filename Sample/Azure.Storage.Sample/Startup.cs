@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +38,14 @@ namespace Azure.Storage.Sample
             {
                 options.AccessKeyId = "AccessKeyId";
                 options.AccessKeySecret = "AccessKeySecret";
+            });
+
+            services.AddVerifyCodeService(options =>
+            {
+                options.ImagesWidth = 300;
+                options.ImagesHeight = 200;
+                options.ShearSize = 40;
+                options.ImagesPath = Path.Combine(AppContext.BaseDirectory, "Images", "300x200");
             });
         }
 

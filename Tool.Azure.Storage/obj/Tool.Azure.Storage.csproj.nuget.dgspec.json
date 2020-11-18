@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj": {}
+    "E:\\User_Projects\\Projects\\WHJmaxne\\Tools\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj": {}
   },
   "projects": {
-    "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj": {
+    "E:\\User_Projects\\Projects\\WHJmaxne\\Tools\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj": {
       "version": "1.0.8",
       "restore": {
-        "projectUniqueName": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
+        "projectUniqueName": "E:\\User_Projects\\Projects\\WHJmaxne\\Tools\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
         "projectName": "Tool.Azure.Storage",
-        "projectPath": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
+        "projectPath": "E:\\User_Projects\\Projects\\WHJmaxne\\Tools\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\User_Projects\\Projects\\WHJmaxne\\ToolAzureStorage\\Tool.Azure.Storage\\obj\\",
+        "outputPath": "E:\\User_Projects\\Projects\\WHJmaxne\\Tools\\Tool.Azure.Storage\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

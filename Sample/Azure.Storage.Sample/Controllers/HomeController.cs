@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tool.Azure.Storage;
 using Tool.Sms.Aliyun;
+using Tool.VerifyCode;
 
 namespace Azure.Storage.Sample.Controllers
 {
@@ -17,12 +18,14 @@ namespace Azure.Storage.Sample.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAzureStorageService _storage;
         private readonly ISmsService _sms;
+        private readonly IVerifyCodeService _verifyCodeService;
 
-        public HomeController(ILogger<HomeController> logger, IAzureStorageService storage, ISmsService sms)
+        public HomeController(ILogger<HomeController> logger, IAzureStorageService storage, ISmsService sms, IVerifyCodeService verifyCodeService)
         {
             _logger = logger;
             _storage = storage;
             _sms = sms;
+            _verifyCodeService = verifyCodeService;
         }
 
         public async Task<IActionResult> Index()
@@ -50,6 +53,21 @@ namespace Azure.Storage.Sample.Controllers
             };
             await this._sms.SendAsync(sms);
             return Ok();
+        }
+
+        public IActionResult GetVerifyCode()
+        {
+            string code = this._verifyCodeService.CreateVerifyCode();
+            var img = this._verifyCodeService.BytesVerifyCode(code);
+            return File(img, "image/jpeg");
+        }
+
+        public IActionResult GetSlideVerifyCode()
+        {
+            var result = this._verifyCodeService.SlideVerifyCode();
+            // X 坐标记录在缓存中用作验证
+            result.PositionX = default;
+            return Json(result);
         }
 
         public IActionResult Privacy()
