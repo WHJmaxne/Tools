@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Tool.Azure.Storage;
 using Tool.Sms.Aliyun;
 using Tool.VerifyCode;
+using Aspose.Pdf;
 
 namespace Tools.Sample.Controllers
 {
@@ -28,10 +29,20 @@ namespace Tools.Sample.Controllers
             _verifyCodeService = verifyCodeService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult ConvertWord()
+        {
+            string filePath = Path.Combine("C:\\Users\\Administrator\\Desktop\\eRetail", "eRetail2.0部署手册.pdf");
+            Document pdfDocument = new Document(filePath);
+            string saveFile = filePath.Replace(".pdf", ".docx");
+            pdfDocument.Save(saveFile, SaveFormat.DocX);
+            return Ok();
+        }
+
         public async Task<IActionResult> Storage()
         {
             string filePath = Path.Combine(AppContext.BaseDirectory, "REG07.json");

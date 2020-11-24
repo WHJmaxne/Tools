@@ -85,4 +85,14 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Lib\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Aspose.Pdf">
+      <HintPath>Lib\Aspose.Pdf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
