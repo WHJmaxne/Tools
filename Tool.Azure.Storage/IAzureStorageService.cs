@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using Microsoft.Azure.Storage.DataMovement;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,8 +19,8 @@ namespace Tool.Azure.Storage
         Task<string> GetSecureURlAsync(string path);
         Task<CloudBlob> GetCloudBlobAsync(string path);
 
-        Task<string> LargeFileTransferAsync(string sourcePath, string fileName);
-        string LargeFileTransfer(string sourcePath, string fileName);
+        Task<string> LargeFileTransferAsync(string sourcePath, string fileName, Action<TransferStatus> ProgressCallback = null);
+        string LargeFileTransfer(string sourcePath, string fileName, Action<TransferStatus> ProgressCallback = null);
         CloudStorageAccount CreateStorageAccount();
         CloudBlobContainer CreateCloudBlobContainer();
         CloudBlob GetCloudBlob(string path);

@@ -11,6 +11,7 @@ using Tool.Azure.Storage;
 using Tool.Sms.Aliyun;
 using Tool.VerifyCode;
 using Aspose.Pdf;
+using Microsoft.Azure.Storage.DataMovement;
 
 namespace Tools.Sample.Controllers
 {
@@ -51,6 +52,14 @@ namespace Tools.Sample.Controllers
             string path = await _storage.UploadFilesFromStreamAsync(stream, "test/REG07.json");
             return Ok();
         }
+
+        public async Task<IActionResult> LargeFileUpload()
+        {
+            string sourcePath = Path.Combine("D:\\FTP\\餐饮从业人员学生营养知识技能培训课程", "1我国中小学生营养状况.mp4");
+            string path = await _storage.LargeFileTransferAsync(sourcePath, "test001/1我国中小学生营养状况.mp4", ProgressCallback);
+            return Ok();
+        }
+
         public async Task<IActionResult> SendSms()
         {
             IDictionary<string, string> data = new Dictionary<string, string> { { "name", "n1盒子" } };
@@ -90,6 +99,11 @@ namespace Tools.Sample.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private void ProgressCallback(TransferStatus transfer)
+        {
+            Console.WriteLine("Bytes uploaded: {0}", transfer.BytesTransferred);
         }
     }
 }

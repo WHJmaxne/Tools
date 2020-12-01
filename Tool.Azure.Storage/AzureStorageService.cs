@@ -97,7 +97,7 @@ namespace Tool.Azure.Storage
             }
         }
 
-        public async Task<string> LargeFileTransferAsync(string sourcePath, string fileName)
+        public async Task<string> LargeFileTransferAsync(string sourcePath, string fileName, Action<TransferStatus> ProgressCallback = null)
         {
             try
             {
@@ -105,9 +105,9 @@ namespace Tool.Azure.Storage
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
 
                 // 设置并发操作的数量
-                TransferManager.Configurations.ParallelOperations = 64;
+                TransferManager.Configurations.ParallelOperations = 8;
                 // 设置单块 blob 的大小，它必须在 4MB 到 100MB 之间，并且是 4MB 的倍数，默认情况下是 4MB
-                TransferManager.Configurations.BlockSize = 64 * 1024 * 1024;
+                TransferManager.Configurations.BlockSize = 8 * 1024 * 1024;
                 // 设置传输上下文并跟踪上传进度
                 var context = new SingleTransferContext();
                 UploadOptions uploadOptions = new UploadOptions
@@ -116,6 +116,7 @@ namespace Tool.Azure.Storage
                 };
                 context.ProgressHandler = new Progress<TransferStatus>(progress =>
                 {
+                    if (ProgressCallback != null) ProgressCallback(progress);
                     //显示上传进度
                     Console.WriteLine("Bytes uploaded: {0}", progress.BytesTransferred);
                 });
@@ -131,7 +132,7 @@ namespace Tool.Azure.Storage
             }
         }
 
-        public string LargeFileTransfer(string sourcePath, string fileName)
+        public string LargeFileTransfer(string sourcePath, string fileName, Action<TransferStatus> ProgressCallback = null)
         {
             try
             {
@@ -153,6 +154,7 @@ namespace Tool.Azure.Storage
 
                 context.ProgressHandler = new Progress<TransferStatus>(progress =>
                 {
+                    if (ProgressCallback != null) ProgressCallback(progress);
                     //显示上传进度
                     Console.WriteLine("Bytes uploaded: {0}", progress.BytesTransferred);
                 });
