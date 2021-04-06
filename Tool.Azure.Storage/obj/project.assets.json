@@ -4405,7 +4405,7 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.9",
+    "version": "1.0.10",
     "restore": {
       "projectUniqueName": "E:\\User_Projects\\Projects\\WHJmaxne\\Tools\\Tool.Azure.Storage\\Tool.Azure.Storage.csproj",
       "projectName": "Tool.Azure.Storage",
@@ -4473,7 +4473,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

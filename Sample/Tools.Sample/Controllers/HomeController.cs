@@ -60,6 +60,12 @@ namespace Tools.Sample.Controllers
             return Ok();
         }
 
+        public async Task<IActionResult> GetSasUrl()
+        {
+            string url = _storage.GetSecureURl("");
+            return Ok(url);
+        }
+
         public async Task<IActionResult> SendSms()
         {
             IDictionary<string, string> data = new Dictionary<string, string> { { "name", "n1盒子" } };

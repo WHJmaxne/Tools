@@ -19,12 +19,14 @@ namespace Tool.Azure.Storage
         public BlobContainerPublicAccessType BlobContainerPublicAccessType { get; set; } = BlobContainerPublicAccessType.Off;
         /// <summary>
         /// Permissions : read
-        /// SharedAccessExpiryTime: 300s
+        /// SharedAccessStartTime：DateTime.UtcNow
+        /// SharedAccessExpiryTime: 1800s
         /// </summary>
         public SharedAccessBlobPolicy SharedAccessBlobPolicy { get; set; } = new SharedAccessBlobPolicy
         {
             Permissions = SharedAccessBlobPermissions.Read,
-            SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(300)
+            SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(1800),
+            SharedAccessStartTime = DateTime.UtcNow
         };
     }
 }

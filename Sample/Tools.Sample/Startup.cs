@@ -30,7 +30,7 @@ namespace Tools.Sample
             services.AddAzureStorage(options =>
             {
                 options.ConnectionString = "ConnectionString";
-                options.ContainerName = "blob-test";
+                options.ContainerName = "ContainerName";
                 options.BlobContainerPublicAccessType = BlobContainerPublicAccessType.Blob;
             });
 
