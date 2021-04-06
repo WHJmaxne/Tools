@@ -25,8 +25,8 @@ namespace Tool.Azure.Storage
         public SharedAccessBlobPolicy SharedAccessBlobPolicy { get; set; } = new SharedAccessBlobPolicy
         {
             Permissions = SharedAccessBlobPermissions.Read,
-            SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(1800),
-            SharedAccessStartTime = DateTime.UtcNow
+            SharedAccessStartTime = DateTime.UtcNow,
+            SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(1800)
         };
     }
 }
