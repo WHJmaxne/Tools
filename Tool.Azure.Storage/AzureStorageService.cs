@@ -212,7 +212,13 @@ namespace Tool.Azure.Storage
 
                 var blob = await this.GetCloudBlobAsync(path);
 
-                var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
+                var sas = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy
+                {
+                    Permissions = this._option.SharedAccessBlobPermissions,
+                    SharedAccessStartTime = DateTime.UtcNow,
+                    SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(this._option.SharedAccessExpirySeconds)
+                });
+
                 var secureURl = blob.Uri.AbsoluteUri + sas;
                 return secureURl.ToString();
             }
@@ -231,7 +237,14 @@ namespace Tool.Azure.Storage
                     return string.Empty;
 
                 var blob = this.GetCloudBlob(path);
-                var sas = blob.GetSharedAccessSignature(this._option.SharedAccessBlobPolicy);
+
+                var sas = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy
+                {
+                    Permissions = this._option.SharedAccessBlobPermissions,
+                    SharedAccessStartTime = DateTime.UtcNow,
+                    SharedAccessExpiryTime = DateTime.UtcNow.AddSeconds(this._option.SharedAccessExpirySeconds)
+                });
+
                 var secureURl = blob.Uri.AbsoluteUri + sas;
                 return secureURl.ToString();
             }
