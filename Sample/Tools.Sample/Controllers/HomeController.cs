@@ -37,7 +37,7 @@ namespace Tools.Sample.Controllers
 
         public IActionResult ConvertWord()
         {
-            string filePath = Path.Combine("C:\\Users\\Administrator\\Desktop\\eRetail", "eRetail2.0部署手册.pdf");
+            string filePath = Path.Combine(AppContext.BaseDirectory, "TempFile", "eRetail2.0接口文档.pdf");
             Document pdfDocument = new Document(filePath);
             string saveFile = filePath.Replace(".pdf", ".docx");
             pdfDocument.Save(saveFile, SaveFormat.DocX);
