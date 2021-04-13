@@ -184,5 +184,50 @@ namespace Tool.Sms.Aliyun
                 return ((int)response.StatusCode, await response.Content.ReadAsStringAsync());
             }
         }
+
+        public async Task<(bool success, string response)> SendVerifyCodeAsync(string Phone)
+        {
+            if (this._option.VerifyCodeOptions == null)
+            {
+                throw new ArgumentNullException("VerifyCodeOptions is Invalid");
+            }
+            Random random = new Random();
+            string code = random.Next(100000, 999999).ToString();
+            var res = await this.SendVerifyCodeAsync(Phone, code, this._option.VerifyCodeOptions.Signature, this._option.VerifyCodeOptions.TempleteKey, this._option.VerifyCodeOptions.OutId);
+            return res;
+        }
+
+        public async Task<(bool success, string response)> SendVerifyCodeAsync(string Phone, string Code, string Signature, string TempleteKey, string OutId = "")
+        {
+            if (string.IsNullOrWhiteSpace(Signature) || string.IsNullOrWhiteSpace(TempleteKey))
+            {
+                throw new ArgumentNullException("Signature Or TempleteKey is Invalid");
+            }
+            if (string.IsNullOrWhiteSpace(Phone))
+            {
+                throw new ArgumentNullException("Phone is Invalid");
+            }
+            if (string.IsNullOrWhiteSpace(Code))
+            {
+                throw new ArgumentNullException("Code is Invalid");
+            }
+
+            IDictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("code", Code);
+            SmsObject sms = new SmsObject
+            {
+                Data = data,
+                Mobile = Phone,
+                Signature = Signature,
+                TempletKey = TempleteKey,
+                OutId = OutId
+            };
+            var res = await this.SendAsync(sms);
+            if (res.success)
+            {
+                res.response = Code;
+            }
+            return res;
+        }
     }
 }

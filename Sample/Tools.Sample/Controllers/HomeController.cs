@@ -78,6 +78,7 @@ namespace Tools.Sample.Controllers
                 OutId = ""
             };
             await this._sms.SendAsync(sms);
+
             return Ok();
         }
 

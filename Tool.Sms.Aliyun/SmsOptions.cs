@@ -16,8 +16,16 @@ namespace Tool.Sms.Aliyun
         public bool AutoRetry { get; set; } = true;
         public int TimeoutInMilliSeconds { get; set; } = 100000;
 
+        public VerifyCodeOptions VerifyCodeOptions { get; set; } = new VerifyCodeOptions();
 
         public string AccessKeyId { get; set; }
         public string AccessKeySecret { get; set; }
+    }
+
+    public class VerifyCodeOptions
+    {
+        public string Signature { get; set; }
+        public string TempleteKey { get; set; }
+        public string OutId { get; set; } = string.Empty;
     }
 }
