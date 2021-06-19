@@ -276,10 +276,10 @@ namespace Tool.Azure.Storage
             return blobName;
         }
 
-        public void Configure(StorageOptions options)
+        public void Configure(string containerName, BlobContainerPublicAccessType blobContainerPublicAccessType)
         {
-            this._option = options;
-            this.ContainerName = options.ContainerName;
+            this._option.BlobContainerPublicAccessType = blobContainerPublicAccessType;
+            this.ContainerName = containerName;
         }
     }
 }
