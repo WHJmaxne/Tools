@@ -14,7 +14,7 @@ namespace Tool.Azure.Storage
 {
     public class AzureStorageService : IAzureStorageService
     {
-        private readonly StorageOptions _option;
+        private StorageOptions _option;
         private CloudStorageAccount _cloudStorageAccount;
         private readonly ILogger<AzureStorageService> _logger;
         private string _containerName;
@@ -276,5 +276,10 @@ namespace Tool.Azure.Storage
             return blobName;
         }
 
+        public void Configure(StorageOptions options)
+        {
+            this._option = options;
+            this.ContainerName = options.ContainerName;
+        }
     }
 }

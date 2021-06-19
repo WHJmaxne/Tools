@@ -32,5 +32,6 @@ namespace Tool.Azure.Storage
         /// <param name="splitChar">default split char '@'</param>
         /// <returns></returns>
         string[] GetSecureArrURl(string path, params char[] splitChar);
+        void Configure(StorageOptions options);
     }
 }
