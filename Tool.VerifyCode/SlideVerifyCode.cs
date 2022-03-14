@@ -53,7 +53,9 @@ namespace Tool.VerifyCode
             Random rd = new Random();
             _PositionX = rd.Next(_MinRangeX, _MaxRangeX);
             _PositionY = rd.Next(_MinRangeY, _MaxRangeY);
-            using (Bitmap bmp = new Bitmap(Path.Combine(_option.ImagesPath, (new Random()).Next(1, GetImageCount()) + ".jpg")))
+            string[] files = Directory.GetFiles(_option.ImagesPath);
+            string file = files[new Random().Next(0, files.Length)];
+            using (Bitmap bmp = new Bitmap(file))
             {
                 using Bitmap cut = CutImage(bmp, _option.ShearSize, _option.ShearSize, _PositionX, _PositionY);
                 using Bitmap normal = GetNewBitMap(bmp, _PositionX, _PositionY);
@@ -171,13 +173,6 @@ namespace Tool.VerifyCode
             }
             return bmp;
         }
-
-        private int GetImageCount()
-        {
-            int count = Directory.GetFiles(this._option.ImagesPath).Length;
-            return count;
-        }
-
 
         //Bitmap转为base64编码的文本
         private string ImgToBase64String(Bitmap bmp)
