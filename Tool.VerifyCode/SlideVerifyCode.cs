@@ -81,20 +81,20 @@ namespace Tool.VerifyCode
             Image fromImage = sFromBmp;
             //先初始化一个位图对象，来存储截取后的图像
             Bitmap bmpDest = new Bitmap(cutWidth, cutHeight, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-            using (Graphics g = Graphics.FromImage(bmpDest))
-            {
-                //这个矩形定义了，你将要在被截取的图像上要截取的图像区域的左顶点位置和截取的大小
-                Rectangle rectSource = new Rectangle(x, y, cutWidth, cutHeight);
+            using Graphics g = Graphics.FromImage(bmpDest);
 
-                //这个矩形定义了，你将要把 截取的图像区域 绘制到初始化的位图的位置和大小
-                //我的定义，说明，我将把截取的区域，从位图左顶点开始绘制，绘制截取的区域原来大小
-                Rectangle rectDest = new Rectangle(0, 0, cutWidth, cutHeight);
+            //这个矩形定义了，你将要在被截取的图像上要截取的图像区域的左顶点位置和截取的大小
+            Rectangle rectSource = new Rectangle(x, y, cutWidth, cutHeight);
 
-                //第一个参数就是加载你要截取的图像对象，第二个和第三个参数及如上所说定义截取和绘制图像过程中的相关属性，第四个属性定义了属性值所使用的度量单位
+            //这个矩形定义了，你将要把 截取的图像区域 绘制到初始化的位图的位置和大小
+            //我的定义，说明，我将把截取的区域，从位图左顶点开始绘制，绘制截取的区域原来大小
+            Rectangle rectDest = new Rectangle(0, 0, cutWidth, cutHeight);
 
-                g.DrawImage(fromImage, rectDest, rectSource, GraphicsUnit.Pixel);
-                return bmpDest;
-            }
+            //第一个参数就是加载你要截取的图像对象，第二个和第三个参数及如上所说定义截取和绘制图像过程中的相关属性，第四个属性定义了属性值所使用的度量单位
+
+            g.DrawImage(fromImage, rectDest, rectSource, GraphicsUnit.Pixel);
+            return bmpDest;
+
         }
 
 
