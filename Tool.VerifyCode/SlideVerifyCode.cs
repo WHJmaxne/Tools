@@ -116,7 +116,7 @@ namespace Tool.VerifyCode
             Bitmap bt = new Bitmap(_option.ShearSize, _option.ShearSize);
             Graphics g1 = Graphics.FromImage(bt);  //创建b1的Graphics
             g1.FillRectangle(Brushes.Black, new Rectangle(0, 0, _option.ShearSize, _option.ShearSize));   //把b1涂成红色
-            bt = PTransparentAdjust(bt, 120);
+            bt = PTransparentAdjust(bt, 150);
             // 添加水印 
             grap.DrawImage(bt, spaceX, spaceY, _option.ShearSize, _option.ShearSize);
             grap.Dispose();
